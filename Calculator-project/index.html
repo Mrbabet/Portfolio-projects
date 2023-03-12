@@ -11,6 +11,7 @@
     <div class="container">
       <div class="display">
         <div class="previous-calc"></div>
+        <div class="math-sign"></div>
         <div class="current-calc"></div>
       </div>
       <button class="clear-all">AC</button>
@@ -21,7 +22,7 @@
       <button class="number">2</button>
       <button class="number">3</button>
       <button class="operator">^</button>
-      <button class="operator">&times</button>
+      <button class="operator">*</button>
       <button class="number">4</button>
       <button class="number">5</button>
       <button class="number">6</button>
@@ -32,9 +33,16 @@
       <button class="number">9</button>
       <button class="operator">log</button>
       <button class="plus operator">+</button>
-      <button class="number">•</button>
+      <button class="number">.</button>
       <button class="number">0</button>
       <button class="equals">=</button>
+    </div>
+    <div class="calculator-history">
+      <p class="history-title">
+        Last Calculations <button class="history-btn">Clear History</button>
+      </p>
+
+      <ul class="history"></ul>
     </div>
     <script src="script.js"></script>
   </body>

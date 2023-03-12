@@ -74,7 +74,9 @@ select {
 body {
   min-height: 100vh;
   background-color: #5f615f;
-  display: grid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 button {
@@ -88,7 +90,7 @@ button {
 .container {
   display: grid;
   grid-template-columns: repeat(5, 80px);
-  grid-template-rows: minmax(120px, auto) repeat(7, 80px);
+  grid-template-rows: minmax(120px, auto) repeat(5, 80px);
   place-content: center;
 }
 
@@ -179,4 +181,14 @@ button {
 }
 .current-calc {
   font-size: 30px;
+}
+.calculator-history {
+  display: none;
+  height: 520px;
+  margin-left: 2rem;
+}
+.history-title {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
 }
