@@ -23,14 +23,16 @@ const displayNumber = function (e) {
     currCalc.textContent = "";
     operationCompleted = !operationCompleted;
   }
+  if (e.target !== "" && operationCompleted === false) {
+    currCalc.innerHTML += this.textContent;
+  }
 
   //Adding up the string
-  currCalc.innerHTML += this.textContent;
 };
 console.log(operationCompleted);
 
 // Function which displaus operators
-const operate = function (e) {
+const operate = function () {
   //If there is no number and minus is clicked allow it
   if (currCalc.textContent === "" && this.textContent === "-")
     return (currCalc.textContent = "-");
@@ -45,7 +47,7 @@ const operate = function (e) {
   mathSign.innerHTML = this.textContent;
   //Make currentCalc number previous Calc number
   prevCalc.textContent = currCalc.textContent;
-  //Make currentCall number empty
+  //Make currentCalc number empty
   currCalc.textContent = "";
 };
 // Function that deletes one value from currentCalc string
@@ -111,7 +113,9 @@ const addToHistory = function () {
   item.className = "history-item";
   historyContainer.appendChild(item);
 
-  item.textContent = `${prevCalc.textContent} ${mathSign.textContent} ${currCalc.textContent} = ${result} `;
+  item.textContent = `${prevCalc.textContent} ${mathSign.textContent} ${
+    currCalc.textContent
+  } = ${result.toLocaleString()} `;
 };
 const clearHistory = function () {
   const historyItem = document.querySelector(".history-item");
@@ -121,8 +125,6 @@ const clearHistory = function () {
 //Things to add up
 
 //For some functions it should be performed on click funcion for example log or root square
-
-//If equals btn was clicked next number clicked should delete the curr value and start new equation
 
 // Event Listeners
 numberBtn.forEach((number) => {
