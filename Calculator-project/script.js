@@ -8,21 +8,29 @@ const deleteBtn = document.querySelector(".delete");
 const numberBtn = document.querySelectorAll(".number");
 const operatorBtn = document.querySelectorAll(".operator");
 const equals = document.querySelector(".equals");
-
-// Function which displays numbers 0-9 and .
-const displayNumber = function () {
+const historyContainer = document.querySelector(".calculator-history");
+const clearHistoryBtn = document.querySelector(".history-btn");
+let operationCompleted = false;
+// Function which displays numbers 0-9 and '.'
+const displayNumber = function (e) {
   //if dot is already inclued return and dont add up more dots
   if (this.textContent === "." && currCalc.innerHTML.includes(".")) return;
   //if dot is clicked return zero before dot
   if (this.textContent === "." && currCalc.innerHTML === "")
     return (currCalc.textContent = "0.");
+  //This statement makes whenever the number is clcked after the equal sign new equations starts
+  if (e.target !== "" && operationCompleted === true) {
+    currCalc.textContent = "";
+    operationCompleted = !operationCompleted;
+  }
 
   //Adding up the string
   currCalc.innerHTML += this.textContent;
 };
+console.log(operationCompleted);
 
 // Function which displaus operators
-const operate = function () {
+const operate = function (e) {
   //If there is no number and minus is clicked allow it
   if (currCalc.textContent === "" && this.textContent === "-")
     return (currCalc.textContent = "-");
@@ -32,6 +40,7 @@ const operate = function () {
   if (mathSign.textContent !== "") {
     displayResult();
   }
+
   //Display mathsign
   mathSign.innerHTML = this.textContent;
   //Make currentCalc number previous Calc number
@@ -67,27 +76,46 @@ const displayResult = function () {
     case "÷":
       result = b / a;
       break;
+    //Make new function for square root
     case "√":
       result = Math.sqrt(b);
       break;
     case "*":
       result = a * b;
       break;
+    //Make new function for square root
     case "%":
       result = (b / 100) * a;
       break;
     case "^":
       result = b ** a;
       break;
+    //Make new function for logs
     case "log":
       result = Math.log(b);
-
-    default:
       break;
   }
+
+  addToHistory();
+
   currCalc.textContent = result;
   mathSign.textContent = "";
   prevCalc.textContent = "";
+};
+const complete = function () {
+  operationCompleted = true;
+};
+
+const addToHistory = function () {
+  const item = document.createElement("li");
+  item.className = "history-item";
+  historyContainer.appendChild(item);
+
+  item.textContent = `${prevCalc.textContent} ${mathSign.textContent} ${currCalc.textContent} = ${result} `;
+};
+const clearHistory = function () {
+  const historyItem = document.querySelector(".history-item");
+  historyItem.remove();
 };
 
 //Things to add up
@@ -104,3 +132,5 @@ deleteBtn.addEventListener("click", deleteFunction);
 clearAllBtn.addEventListener("click", clearAll);
 operatorBtn.forEach((btn) => btn.addEventListener("click", operate));
 equals.addEventListener("click", displayResult);
+equals.addEventListener("click", complete);
+clearHistoryBtn.addEventListener("click", clearHistory);
