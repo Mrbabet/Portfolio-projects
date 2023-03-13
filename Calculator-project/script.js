@@ -29,7 +29,6 @@ const displayNumber = function (e) {
 
   //Adding up the string
 };
-console.log(operationCompleted);
 
 // Function which displaus operators
 const operate = function () {
@@ -125,6 +124,8 @@ const clearHistory = function () {
 //Things to add up
 
 //For some functions it should be performed on click funcion for example log or root square
+
+//Need to fix bugs with 0.1+0.2 etc
 
 // Event Listeners
 numberBtn.forEach((number) => {
