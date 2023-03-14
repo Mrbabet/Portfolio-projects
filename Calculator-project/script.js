@@ -10,6 +10,8 @@ const operatorBtn = document.querySelectorAll(".operator");
 const equals = document.querySelector(".equals");
 const historyContainer = document.querySelector(".calculator-history");
 const clearHistoryBtn = document.querySelector(".history-btn");
+const rootSqr = document.querySelector(".root-sqr");
+const logBtn = document.querySelector(".log");
 let operationCompleted = false;
 // Function which displays numbers 0-9 and '.'
 const displayNumber = function (e) {
@@ -29,6 +31,7 @@ const displayNumber = function (e) {
 
   //Adding up the string
 };
+console.log(operationCompleted);
 
 // Function which displaus operators
 const operate = function () {
@@ -77,23 +80,14 @@ const displayResult = function () {
     case "÷":
       result = b / a;
       break;
-    //Make new function for square root
-    case "√":
-      result = Math.sqrt(b);
-      break;
     case "*":
       result = a * b;
       break;
-    //Make new function for square root
     case "%":
       result = (b / 100) * a;
       break;
     case "^":
       result = b ** a;
-      break;
-    //Make new function for logs
-    case "log":
-      result = Math.log(b);
       break;
   }
 
@@ -102,6 +96,22 @@ const displayResult = function () {
   currCalc.textContent = result;
   mathSign.textContent = "";
   prevCalc.textContent = "";
+};
+//Function that calculates root square of number. The result is shown after the rootsqr btn is clicked
+const calcRootSqr = function () {
+  let a = Number(currCalc.textContent);
+  result = Math.sqrt(a);
+  addToHistory();
+  prevCalc.textContent = `√(${currCalc.textContent})`;
+  currCalc.textContent = result;
+};
+//Function that calculates log10 of number. The result is shown after the log btn is clicked
+const calcLog = function () {
+  let a = Number(currCalc.textContent);
+  result = Math.log10(a);
+  addToHistory();
+  prevCalc.textContent = `log(${currCalc.textContent})`;
+  currCalc.textContent = result;
 };
 const complete = function () {
   operationCompleted = true;
@@ -123,9 +133,7 @@ const clearHistory = function () {
 
 //Things to add up
 
-//For some functions it should be performed on click funcion for example log or root square
-
-//Need to fix bugs with 0.1+0.2 etc
+//FIX the bugs of the binary type of language 0.14*100 || 0.1+0.2
 
 // Event Listeners
 numberBtn.forEach((number) => {
@@ -137,3 +145,5 @@ operatorBtn.forEach((btn) => btn.addEventListener("click", operate));
 equals.addEventListener("click", displayResult);
 equals.addEventListener("click", complete);
 clearHistoryBtn.addEventListener("click", clearHistory);
+rootSqr.addEventListener("click", calcRootSqr);
+logBtn.addEventListener("click", calcLog);
